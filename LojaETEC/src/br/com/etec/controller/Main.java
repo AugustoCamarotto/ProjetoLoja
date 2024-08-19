@@ -1,7 +1,8 @@
-package br.com.etec.model;
+package br.com.etec.controller;
 	
 import javafx.application.Application;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.fxml.FXMLLoader;
@@ -12,10 +13,14 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("/br/com/etec/view/telaLogin.fxml"));
-			Scene scene = new Scene(root,400,400);
+			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("/br/com/etec/view/application.css").toExternalForm());
 			primaryStage.setScene(scene);
-			primaryStage.show();
+			
+			primaryStage.initStyle(StageStyle.UNDECORATED);
+			
+			
+			primaryStage.show();//Show tem que ser o último pq ele é que mostra
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
