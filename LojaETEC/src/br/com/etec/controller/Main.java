@@ -25,7 +25,7 @@ public class Main extends Application {
 			e.printStackTrace();
 		}
 	}
-	
+	//Edição para fazer commit
 	public static void main(String[] args) {
 		launch(args);
 	}
