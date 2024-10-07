@@ -1,5 +1,6 @@
 package br.com.etec.model;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -7,11 +8,16 @@ import java.sql.SQLException;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import javafx.scene.Node;
 
 public class Operacoes {
 	
@@ -27,10 +33,12 @@ public class Operacoes {
 	private Button btnFechar;
 	@FXML
 	private Stage acpPalco;
+	@FXML
+	private Stage palcoPrincipal;
 	
 	//Botão Acessar!
 	@FXML
-	private void validarUsuario(ActionEvent event) throws SQLException {
+	private void validarUsuario(ActionEvent event) throws SQLException, IOException {
 		String nomeUsuario;
 		nomeUsuario = txfUsuario.getText();
 		String senhaUsuario;
@@ -48,6 +56,7 @@ public class Operacoes {
 			else {
 				if(verificarUsuarioSenha(nomeUsuario, senhaUsuario)) {
 					mostrarAlerta(Alert.AlertType.CONFIRMATION, "ACESSO PERMITIDO!", "Login bem sucedido!");
+					navegarTelaPrincipal(event);
 				}
 				else {
 					mostrarAlerta(Alert.AlertType.ERROR, "ACESSO NEGADO!", "Usuário ou Senha inválidos");
@@ -57,7 +66,7 @@ public class Operacoes {
 	
 	//Botão Cadastrar
 	@FXML
-	private void cadastrarUsuario(ActionEvent event) throws SQLException {
+	private void cadastrarUsuario(ActionEvent event) throws SQLException, IOException {
 		String nomeUsuario;
 		nomeUsuario = txfUsuario.getText();
 		String senhaUsuario;
@@ -75,6 +84,7 @@ public class Operacoes {
 			else {
 				if(cadastrarUsuarioSenha(nomeUsuario, senhaUsuario)) {
 					mostrarAlerta(Alert.AlertType.CONFIRMATION, "Usuário Cadastrado!", "Cadastro Efetuado!");
+					
 				}
 				else {
 					mostrarAlerta(Alert.AlertType.ERROR, "Tente Novamente!", "Erro No Cadastro");
@@ -113,6 +123,7 @@ public class Operacoes {
 
             if (rs.next()) {
                 usuarioValido = true;
+                
             }
         } finally {
             if (rs != null) {
@@ -158,4 +169,21 @@ public class Operacoes {
 	    return usuarioValido;
 	}
 
+	// Evento de navegação para Tela Principal
+	
+	public void navegarTelaPrincipal(ActionEvent event) throws IOException {
+		
+		AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("/br/com/etec/view/telaPrincipal.fxml"));
+		
+		palcoPrincipal = (Stage)((Node)event.getSource()).getScene().getWindow();
+		
+		Scene scene = new Scene(root);
+		scene.getStylesheets().add(getClass().getResource("/br/com/etec/view/application.css").toExternalForm());
+		palcoPrincipal.setScene(scene);
+		
+		palcoPrincipal.initStyle(StageStyle.UNDECORATED);
+		
+		palcoPrincipal.show();
+	}
+	
 }
