@@ -12,7 +12,8 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("/br/com/etec/view/telaLogin.fxml"));
+			// Alteração para realizar modificações sem realizar o login AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("/br/com/etec/view/telaLogin.fxml"));
+			AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("/br/com/etec/view/telaPrincipal.fxml"));
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("/br/com/etec/view/application.css").toExternalForm());
 			primaryStage.setScene(scene);
@@ -25,7 +26,7 @@ public class Main extends Application {
 			e.printStackTrace();
 		}
 	}
-	//Edição para fazer commit
+
 	public static void main(String[] args) {
 		launch(args);
 	}
