@@ -46,6 +46,7 @@ public class operacoesTelaPrincipal {
 		carregarComboBox(cmbTipo, "tipo");
 		carregarComboBox(cmbMarca, "marca");
 		carregarComboBox(cmbModelo, "modelo");
+		//Banco de daos ainda não criado
 	}
 
 	private void carregarComboBox(ComboBox<String> comboBox, String coluna){
